@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
+import io from 'socket.io-client';
+import * as config from '../env';
+
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
@@ -17,11 +20,31 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
+  constructor(props) {
+    super(props);
+    this.io = io(config.server);
+
+    this.io.emit('login', config.user);
+
+    this.io.on('heartRate', heartRate => {
+      if (heartRate) {
+        this.setState({
+          heartRate
+        });
+      }
+    });
+  }
+
+  state = {
+    heartRate: 0
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
+            <Text>{this.state.heartRate}</Text>
             <Image
               source={
                 __DEV__
