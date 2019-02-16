@@ -4,25 +4,17 @@ import { Button, Input } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Login extends React.Component {
-  state = { email: '', password: '', errorMessage: null , displayError:false}
+  state = { email: ''}
 
-//   handleLogin = () => {
-//     const { email, password } = this.state
-//     firebase
-//       .auth()
-//       .signInWithEmailAndPassword(email, password)
-//       .then(() => this.props.navigation.navigate('Main'))
-//       .catch(error => this.setState({ errorMessage: error.message }))
-// 	}
-	
-	// TODO:
-	// - add a route for each menu item (could be a pop up or whatnot but have something happen when item pressed)
-	// - push items down and have something on top like welcome? and add more menu items if need be(ask Haru)
+  handleLogin = () => {
+    const { email} = this.state
+    this.props.navigation.navigate('Home', {email: email})
+	}
 
   render() {
     return (
 		<ImageBackground source={require('../assets/images/login-background.png')} style={{width: '100%', height: '100%'}}>
-      <StatusBar
+            <StatusBar
 				barStyle="light-content"
 			/>
 			<View style={styles.container}>
@@ -34,8 +26,6 @@ export default class Login extends React.Component {
 					inputStyle={{color: 'white'}}
                     leftIcon={{ type: 'font-awesome', name: 'user', color: '#fff' }}
                     leftIconContainerStyle={{marginRight: 10}}
-					//errorStyle={(displayError) ? { color: 'red' } : null}
-					//errorMessage={displayError ? 'Enter a valid email address' : null}
 					onChangeText={email => this.setState({ email })}
 							value={this.state.email}
 				/>
@@ -65,7 +55,7 @@ export default class Login extends React.Component {
 					buttonStyle={styles.signupButton}
 					titleStyle={{fontSize:20, fontWeight:'bold' }}
 						/>
-      </View>
+            </View>
 		</ImageBackground>
     )
   }
