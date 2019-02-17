@@ -2,16 +2,13 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, Dimensions} from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { LinearGradient } from 'expo';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Login extends React.Component {
-  state = { email: ''}
+  state = { email: '', name: ''}
 
-  handleLogin = async () => {
-    const { email} = this.state
-    
-
-    this.props.navigation.navigate('Home', {email: email})
+  handleSignup = async () => {
+    const { email, name} = this.state
+    this.props.navigation.navigate('Home', {email: email, name: name})
 	}
 
   render() {
@@ -32,6 +29,16 @@ export default class Login extends React.Component {
           }}
           resizeMode='contain'
         />
+                <Input
+					placeholder='Name'
+					placeholderTextColor='#fff'
+					autoCapitalize="words"
+					inputStyle={{color: 'white'}}
+                    leftIcon={{ type: 'font-awesome', name: 'user', color: '#fff' }}
+                    leftIconContainerStyle={{marginRight: 10}}
+					onChangeText={email => this.setState({ name })}
+                    value={this.state.name}
+				/>
 				<Input
 					placeholder='Email'
 					placeholderTextColor='#fff'
@@ -49,21 +56,13 @@ export default class Login extends React.Component {
 								{this.state.errorMessage}
 							</Text>}
 				<Button
-					title="Login"
+					title="Sign Up"
 					titleStyle={{color:"#1e4340" }}
 					borderRadius={5}
-					iconRight
 					shake={true}
 					buttonStyle={styles.button}
-					onPress={this.handleLogin}
+					onPress={this.handleSignup}
 				/>
-                <Text style={{color:'white'}}>Don't have an account?</Text>
-                <Button
-                    title="Sign Up"
-                    onPress={() => this.props.navigation.navigate('SignUp')}
-                    buttonStyle={styles.signupButton}
-                    titleStyle={{fontSize:20, fontWeight:'bold' }}
-                />
         </View>
 		  </LinearGradient>
     )
