@@ -18,19 +18,27 @@ export class HeartCard extends React.Component {
 
     this.io.on('heartRate', heartRate => {
       if (heartRate) {
+        let myRates = this.state.data;
+        if (myRates.length < 10) {
+          myRates = myRates.slice(0).concat(Number(heartRate));
+        } else {
+          myRates = myRates.slice(1).concat(Number(heartRate));
+        }
+
         this.setState({
-          heartRate
+          heartRate,
+          data: myRates
         });
       }
     });
   }
 
   state = {
-    heartRate: 0
+    heartRate: 0,
+    data: []
   }
 
   render() {
-    const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ];
     return <View style={styles.heartCardContainer}>
       <LinearGradient
         colors={['#ff6969ff', '#ff9472ff']}
@@ -51,7 +59,7 @@ export class HeartCard extends React.Component {
         <View style={styles.heartGraphContainer}>
           <LineChart
             style={{ height: '100%' }}
-            data={ data }
+            data={this.state.data}
             svg={{
               stroke: 'rgba(255,255,255,0.75)',
               strokeWidth: 3
