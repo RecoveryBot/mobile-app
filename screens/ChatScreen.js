@@ -44,7 +44,9 @@ export default class ChatScreen extends React.Component {
     super(props);
     directLine.activity$.subscribe(botMessage => {
       const newMessage = botMessageToGiftedMessage(botMessage);
-      this.setState({ messages: [newMessage, ...this.state.messages] });
+      if(newMessage.from.id !== '1' ){
+        this.setState({ messages: [newMessage, ...this.state.messages] });
+      }
     });
   }
 
@@ -113,9 +115,9 @@ export default class ChatScreen extends React.Component {
           renderBubble={this.renderBubble}
           renderInputToolbar={this.renderInputToolbar}
           renderSend={this.renderSend}
-          alignTop= {true}
-          isAnimated = {true}
+          textInputProps={{color: '#626d81'}}
           onSend={this.onSend}
+
           />
           {Platform.OS === 'android' ? <KeyboardSpacer /> : null }
       </View>
