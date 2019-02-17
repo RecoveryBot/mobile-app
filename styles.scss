@@ -38,6 +38,23 @@ $font-header: 24px;
   height: 100%;
 }
 
+.greetingContainer {
+  width: 100%;
+  padding: 30px;
+}
+
+.greetingText {
+  color: $dark;
+  font-size: $font-p;
+  font-weight: bold;
+}
+
+.greetingNameText {
+  color: $dark;
+  font-size: $font-h2;
+  font-weight: bold;
+}
+
 .heartCardContainer {
   width: 100%;
   height: 40%;
