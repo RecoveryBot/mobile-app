@@ -20,20 +20,26 @@ export default class ContactsScreen extends React.Component {
   };
 
   state = {
-    isModalVisible: false,
+    isFriendModalVisible: false,
+    isHotModalVisible: false,
   };
 
-  handleFriend = () =>{
-    this.setState({ isModalVisible: !this.state.isModalVisible }, ()=> {console.log("friend contacted")});
-    console.log("friend contacted")
+  handleFriend = () => {
+    this.setState({ isFriendModalVisible: !this.state.isFriendModalVisible });
   }
 
-  handleHotline() {
+  handleHotline = () => {
     console.log("Hotline contacted")
+    this.setState({ isHotModalVisible: !this.state.isHotModalVisible });
   }
 
-  handleAddFriend(){
+  handleAddFriend = () => {
     console.log("Adding Friend")
+  }
+
+  callHotline = () => {
+    alert("Hotline Called");
+    this.setState({ isHotModalVisible: !this.state.isHotModalVisible });
   }
 
   render() {
@@ -48,10 +54,10 @@ export default class ContactsScreen extends React.Component {
           </Card>
         </TouchableOpacity>
         <Overlay 
-          isVisible={this.state.isModalVisible}
+          isVisible={this.state.isFriendModalVisible}
           width="auto"
           height="auto"
-          onBackdropPress={() => this.setState({ isModalVisible: false })}>
+          onBackdropPress={() => this.setState({ isFriendModalVisible: false })}>
           <View style={styles.modalContentR}>
             <Text style={{fontSize:20}}>How would you like to contact your friend</Text>
             <View style = {{flexDirection: "row",justifyContent: "space-around", marginVertical: 30}}>
@@ -78,6 +84,31 @@ export default class ContactsScreen extends React.Component {
             <Text>Contact National Hotline</Text>
           </Card>
         </TouchableOpacity>
+        <Overlay 
+          isVisible={this.state.isHotModalVisible}
+          width="auto"
+          height="auto"
+          onBackdropPress={() => this.setState({ isHotModalVisible: false })}>
+          <View style={styles.modalContentR}>
+            <Text style={{fontSize:20}}>Are you sure you want to call the hotline </Text>
+            <View style = {{flexDirection: "row",justifyContent: "space-around", marginVertical: 30}}>
+              <Button 
+                title='Cancel'
+                onPress={this.handleHotline}
+                raised
+                type='outline'
+                containerStyle={{width: 130}}>
+              </Button>
+              <Button 
+                title='Call Hotline'
+                onPress={this.callHotline}
+                raised
+                type='outline'
+                containerStyle={{width: 130}}>
+              </Button>
+            </View>
+          </View>
+        </Overlay>
         <TouchableOpacity
           onPress={this.handleAddFriend}>
           <Card Title="Add a Contact">
