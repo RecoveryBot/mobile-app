@@ -2,13 +2,19 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, Dimensions} from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { LinearGradient } from 'expo';
+import * as config from "../env";
 
 export default class Login extends React.Component {
   state = { email: '', name: ''}
 
   handleSignup = async () => {
-    const { email, name} = this.state
-    this.props.navigation.navigate('Home', {email: email, name: name})
+    const { email, name} = this.state;
+    const register = await fetch(`${config.server}register?userId=${email}&userName=${name}`, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'omit'
+    });
+    this.props.navigation.navigate('Auth');
 	}
 
   render() {
@@ -36,7 +42,7 @@ export default class Login extends React.Component {
 					inputStyle={{color: 'white'}}
                     leftIcon={{ type: 'font-awesome', name: 'user', color: '#fff' }}
                     leftIconContainerStyle={{marginRight: 10}}
-					onChangeText={email => this.setState({ name })}
+					onChangeText={name => this.setState({ name })}
                     value={this.state.name}
 				/>
 				<Input

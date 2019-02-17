@@ -7,7 +7,6 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-import Modal from "react-native-modal";
 import { Card, Overlay, Button } from 'react-native-elements'
 import { WebBrowser } from 'expo';
 
@@ -47,7 +46,7 @@ export default class ContactsScreen extends React.Component {
             <Text>Contact a Friend</Text>
           </Card>
         </TouchableOpacity>
-        <Overlay 
+        <Overlay
           isVisible={this.state.isModalVisible}
           width="auto"
           height="auto"
@@ -55,14 +54,14 @@ export default class ContactsScreen extends React.Component {
           <View style={styles.modalContentR}>
             <Text style={{fontSize:20}}>How would you like to contact your friend</Text>
             <View style = {{flexDirection: "row",justifyContent: "space-around", marginVertical: 30}}>
-              <Button 
+              <Button
                 title='Call'
                 onPress={this.handleFriend}
                 raised
                 type='outline'
                 containerStyle={{width: 130}}>
               </Button>
-              <Button 
+              <Button
                 title='Text'
                 onPress={this.handleFriend}
                 raised
@@ -84,7 +83,7 @@ export default class ContactsScreen extends React.Component {
             <Text>Add a Contact</Text>
           </Card>
         </TouchableOpacity>
-          
+
         </ScrollView>
       </View>
     );
