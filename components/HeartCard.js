@@ -37,7 +37,21 @@ export class HeartCard extends React.Component {
         colors={['#ff6969ff', '#ff9472ff']}
         style={styles.heartCard}
       >
-        <Text style={styles.heartRateText}>{this.state.heartRate}</Text>
+        <View style={styles.heartInfoContainer}>
+          <View style={styles.heartRateCounter}>
+            {this.state.heartRate < 10 &&
+                <Text style={styles.heartRateSubtleText}>0</Text>
+            }
+            {this.state.heartRate < 100 &&
+                <Text style={styles.heartRateSubtleText}>0</Text>
+            }
+            <Text style={styles.heartRateText}>{this.state.heartRate}</Text>
+          </View>
+          <Text style={styles.heartRateInfo}>beats per minute</Text>
+        </View>
+        <View style={styles.heartGraphContainer}>
+
+        </View>
       </LinearGradient>
     </View>;
   }

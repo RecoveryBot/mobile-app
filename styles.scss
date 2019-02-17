@@ -2,8 +2,12 @@ $light:     #ffffff;
 $dark:      #626d81;
 $primary:   #ff6969;
 $secondary: #ffe9e9;
+$subtle:    rgba(255, 255, 255, 0.5);
 
-$gradient: linear-gradient('to right', #ff6969ff, #ff9472ff);
+$font-h1: 48px;
+$font-h2: 32px;
+$font-p: 16px;
+$font-small: 12px;
 
 %containerBase {
   flex: 1;
@@ -31,9 +35,36 @@ $gradient: linear-gradient('to right', #ff6969ff, #ff9472ff);
 .heartCard {
   width: 100%;
   height: 100%;
+  flex-direction: row;
+}
+
+.heartInfoContainer {
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heartGraphContainer {
+  flex: 2;
+  flex-direction: column;
+}
+
+.heartRateCounter {
+  flex-direction: row;
+}
+
+.heartRateSubtleText {
+  font-size: $font-h1;
+  color: $subtle;
 }
 
 .heartRateText {
-  font-size: 32px;
+  font-size: $font-h1;
   color: $light;
+}
+
+.heartRateInfo {
+  font-size: $font-small;
+  color: $subtle;
 }
