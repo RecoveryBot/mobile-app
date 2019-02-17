@@ -1,6 +1,7 @@
-$light:     #ffffff;
-$dark:      #626d81;
-$primary:   #ff6969;
+$light:      #ffffff;
+$dark:       #626d81;
+$primary:    #ff6969;
+$accent:     #66e2d6;
 $background: #ffe9e9;
 $subtle:    rgba(255, 255, 255, 0.5);
 
@@ -36,11 +37,14 @@ $font-header: 24px;
 
 .contentContainer {
   height: 100%;
+  flex: 1;
 }
 
 .greetingContainer {
   width: 100%;
   padding: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
 .greetingText {
@@ -113,9 +117,37 @@ $font-header: 24px;
 }
 
 .modalContent {
-  background-color: "white";
+  background-color: white;
   padding: 22px;
-  justify-content: "center";
-  align-items: "center";
+  justify-content: center;
+  align-items: center;
   border-radius: 4px;
+}
+
+.slidesContainer {
+  width: 100%;
+  flex: 1;
+}
+
+.slideWrapper {
+  height: 100%;
+}
+
+.slide {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  text-align: center;
+  padding: 0px 10%;
+  margin: 0% 10% 5%;
+  border-radius: 10px;
+}
+
+.slideText {
+  color: $dark;
+}
+
+.buttonText {
+  color: $accent;
 }
