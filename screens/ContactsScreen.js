@@ -7,7 +7,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-import { Card, Overlay, Button } from 'react-native-elements'
+import { Card, Overlay, Button, Input } from 'react-native-elements'
 import { WebBrowser } from 'expo';
 
 import styles from '../styles.scss';
@@ -21,6 +21,8 @@ export default class ContactsScreen extends React.Component {
   state = {
     isFriendModalVisible: false,
     isHotModalVisible: false,
+    isAddModalVisible: false,
+    contactName: '',
   };
 
   handleFriend = () => {
@@ -28,12 +30,21 @@ export default class ContactsScreen extends React.Component {
   }
 
   handleHotline = () => {
-    console.log("Hotline contacted")
     this.setState({ isHotModalVisible: !this.state.isHotModalVisible });
   }
 
   handleAddFriend = () => {
-    console.log("Adding Friend")
+    this.setState({ isAddModalVisible: !this.state.isAddModalVisible });
+  }
+
+  textFriend = async () => {
+    let msg = "Hey there you ok buddy?"
+    console.log("message about to go")
+    const sendText = await fetch(`https://unitingdust.api.stdlib.com/examples-twilio@dev/?tel=9253395106&body=${encodeURIComponent(msg)}`, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'omit'
+    });
   }
 
   callHotline = () => {
@@ -42,7 +53,6 @@ export default class ContactsScreen extends React.Component {
   }
 
   render() {
-    const email = this.props.navigation.getParam('email');
     return (
       <View style={styles.screenContainer}>
         <ScrollView style={styles.homeContainer} contentContainerStyle={styles.contentContainer}>
@@ -54,9 +64,9 @@ export default class ContactsScreen extends React.Component {
         </TouchableOpacity>
         <Overlay 
           isVisible={this.state.isFriendModalVisible}
+          onBackdropPress={() => this.setState({ isFriendModalVisible: false })}
           width="auto"
-          height="auto"
-          onBackdropPress={() => this.setState({ isFriendModalVisible: false })}>
+          height="auto">
           <View style={styles.modalContentR}>
             <Text style={{fontSize:20}}>How would you like to contact your friend</Text>
             <View style = {{flexDirection: "row",justifyContent: "space-around", marginVertical: 30}}>
@@ -69,7 +79,7 @@ export default class ContactsScreen extends React.Component {
               </Button>
               <Button
                 title='Text'
-                onPress={this.handleFriend}
+                onPress={this.textFriend}
                 raised
                 type='outline'
                 containerStyle={{width: 130}}>
@@ -114,7 +124,22 @@ export default class ContactsScreen extends React.Component {
             <Text>Add a Contact</Text>
           </Card>
         </TouchableOpacity>
-
+        <Overlay 
+          isVisible={this.state.isAddModalVisible}
+          width="auto"
+          height="auto"
+          onBackdropPress={() => this.setState({ isAddModalVisible: false })}>
+          <View style={styles.modalContent}>
+            <Text style={{fontSize:20}}>Enter Contact Info</Text>
+            <Input 
+            placeholder="Name"
+            leftIcon={{ type: 'font-awesome', name: 'envelope', color: '#626d81' }}
+            leftIconContainerStyle={{marginRight: 10}}
+					  onChangeText={contactName => this.setState({ contactName })}
+            value={this.state.contactName}
+            />
+          </View>
+        </Overlay>
         </ScrollView>
       </View>
     );
