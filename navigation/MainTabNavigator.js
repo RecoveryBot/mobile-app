@@ -5,7 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ChatScreen from '../screens/ChatScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import ContactsScreen from '../screens/ContactsScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -39,11 +39,11 @@ ChatStack.navigationOptions = {
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const ContactsStack = createStackNavigator({
+  Contacts: ContactsScreen,
 });
 
-SettingsStack.navigationOptions = {
+ContactsStack.navigationOptions = {
   tabBarLabel: 'Contacts',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -56,7 +56,7 @@ SettingsStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   ChatStack,
-  SettingsStack,
+  ContactsStack,
 }, {
   tabBarOptions: {
     activeTintColor: '#626d81',

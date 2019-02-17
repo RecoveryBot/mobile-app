@@ -12,9 +12,9 @@ import styles from '../styles.scss';
 import { TitleBar } from '../components/TitleBar';
 import { HeartCard } from '../components/HeartCard';
 
-export default class HomeScreen extends React.Component {
+export default class ContactsScreen extends React.Component {
   static navigationOptions = {
-    header: <TitleBar></TitleBar>
+    header: <TitleBar title="Contacts"></TitleBar>
   };
 
   render() {
@@ -22,7 +22,7 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={styles.screenContainer}>
         <ScrollView style={styles.homeContainer} contentContainerStyle={styles.contentContainer}>
-          <HeartCard email={email}></HeartCard>
+
         </ScrollView>
       </View>
     );
