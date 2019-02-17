@@ -8,6 +8,17 @@ $font-h1: 48px;
 $font-h2: 32px;
 $font-p: 16px;
 $font-small: 12px;
+$font-header: 24px;
+
+.header {
+  background: $primary;
+}
+
+.headerText {
+  color: $light;
+  font-weight: bold;
+  font-size: $font-header;
+}
 
 %containerBase {
   flex: 1;

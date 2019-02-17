@@ -6,6 +6,8 @@ import { DirectLine } from "botframework-directlinejs";
 
 import * as Config from "../env";
 
+import { TitleBar } from '../components/TitleBar';
+
 const directLine = new DirectLine({
   secret: Config.SECRET_KEY
 });
@@ -30,7 +32,7 @@ function giftedMessageToBotMessage(message) {
 }
 export default class ChatScreen extends React.Component {
   static navigationOptions = {
-    title: 'Chat',
+    header: <TitleBar title="Chat"></TitleBar>
   };
 
   state = {
@@ -57,11 +59,11 @@ export default class ChatScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <GiftedChat 
+        <GiftedChat
           user={{ _id: 1 }}
           messages={this.state.messages}
           isAnimated = {true}
-          onSend={this.onSend} 
+          onSend={this.onSend}
           />
           {Platform.OS === 'android' ? <KeyboardSpacer /> : null }
       </View>

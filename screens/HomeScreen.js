@@ -11,11 +11,12 @@ import {
 import { WebBrowser } from 'expo';
 
 import styles from '../styles.scss';
+import { TitleBar } from '../components/TitleBar';
 import { HeartCard } from '../components/HeartCard';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Recovery Bot'
+    header: <TitleBar></TitleBar>
   };
 
   render() {

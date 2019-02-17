@@ -3,9 +3,6 @@ import {
   View,
   Text
 } from 'react-native';
-import {
-  Card
-} from 'react-native-elements';
 import { LinearGradient } from 'expo';
 import styles from '../styles.scss';
 
