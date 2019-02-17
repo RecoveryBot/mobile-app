@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Image, StatusBar} from 'react-native'
-import { Button, Input } from 'react-native-elements'
+import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar} from 'react-native'
+import { Button, Input } from 'react-native-elements';
+import { LinearGradient } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Login extends React.Component {
@@ -13,7 +14,10 @@ export default class Login extends React.Component {
 
   render() {
     return (
-		<ImageBackground source={require('../assets/images/login-background.png')} style={{width: '100%', height: '100%'}}>
+      <LinearGradient
+        colors={['#ff6969ff', '#ff9472ff']}
+        style={{width: '100%', height: '100%'}}
+      >
             <StatusBar
 				barStyle="light-content"
 			/>
@@ -29,7 +33,7 @@ export default class Login extends React.Component {
 					onChangeText={email => this.setState({ email })}
 							value={this.state.email}
 				/>
-				
+
 				{this.state.errorMessage &&
 							<Text style={{ color: '#ff4a66', fontSize: 16, padding: 5}}>
 								{this.state.errorMessage}
@@ -38,25 +42,13 @@ export default class Login extends React.Component {
 					title="Login"
 					titleStyle={{color:"#1e4340" }}
 					borderRadius={5}
-					icon={{
-						name:'sign-in',
-						size:20,
-						color:'grey'
-					}}
 					iconRight
 					shake={true}
 					buttonStyle={styles.button}
-					onPress={this.handleLogin} 
+					onPress={this.handleLogin}
 				/>
-				<Text style={{color:'white'}}>Don't have an account?</Text>
-						<Button
-							title="Sign Up"
-					onPress={() => this.props.navigation.navigate('SignUp')}
-					buttonStyle={styles.signupButton}
-					titleStyle={{fontSize:20, fontWeight:'bold' }}
-						/>
-            </View>
-		</ImageBackground>
+        </View>
+		  </LinearGradient>
     )
   }
 }
@@ -75,5 +67,5 @@ const styles = StyleSheet.create({
 		borderWidth: 0,
 		backgroundColor: null
   }
-  
+
 })
