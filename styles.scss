@@ -1,10 +1,34 @@
-$light:   #ffffff;
-$dark:    #626d81;
-$primary: #ff6969;
+$light:     #ffffff;
+$dark:      #626d81;
+$primary:   #ff6969;
+$secondary: #ffe9e9;
 
 $gradient: linear-gradient('to right', #ff6969ff, #ff9472ff);
 
-.container {
-  background: $light;
+%containerBase {
   flex: 1;
+}
+
+.screenContainer {
+  @extend %containerBase;
+  flex-direction: row;
+}
+
+.homeContainer {
+  @extend %containerBase;
+  background: $secondary;
+}
+
+.contentContainer {
+  height: 100%;
+}
+
+.heartCardContainer {
+  width: 100%;
+  height: 40%;
+}
+
+.heartCard {
+  width: 100%;
+  height: 100%;
 }
