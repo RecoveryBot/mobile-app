@@ -7,8 +7,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class Login extends React.Component {
   state = { email: ''}
 
-  handleLogin = () => {
+  handleLogin = async () => {
     const { email} = this.state
+    
+
     this.props.navigation.navigate('Home', {email: email})
 	}
 
@@ -31,7 +33,8 @@ export default class Login extends React.Component {
                     leftIcon={{ type: 'font-awesome', name: 'user', color: '#fff' }}
                     leftIconContainerStyle={{marginRight: 10}}
 					onChangeText={email => this.setState({ email })}
-							value={this.state.email}
+                    value={this.state.email}
+                    keyboardType="email-address"
 				/>
 
 				{this.state.errorMessage &&
