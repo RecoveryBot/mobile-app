@@ -10,9 +10,6 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
-import io from 'socket.io-client';
-import * as config from '../env';
-
 import styles from '../styles.scss';
 import { HeartCard } from '../components/HeartCard';
 
@@ -21,31 +18,12 @@ export default class HomeScreen extends React.Component {
     title: 'Recovery Bot'
   };
 
-  constructor(props) {
-    super(props);
-    this.io = io(config.server);
-
-    this.io.emit('login', config.user);
-
-    this.io.on('heartRate', heartRate => {
-      if (heartRate) {
-        this.setState({
-          heartRate
-        });
-      }
-    });
-  }
-
-  state = {
-    heartRate: 0
-  }
-
   render() {
-    const email= this.props.navigation.getParam('email');
+    const email = this.props.navigation.getParam('email');
     return (
       <View style={styles.screenContainer}>
         <ScrollView style={styles.homeContainer} contentContainerStyle={styles.contentContainer}>
-          <HeartCard></HeartCard>
+          <HeartCard email={email}></HeartCard>
         </ScrollView>
       </View>
     );
