@@ -1,0 +1,10 @@
+$light:   #ffffff;
+$dark:    #626d81;
+$primary: #ff6969;
+
+$gradient: linear-gradient('to right', #ff6969ff, #ff9472ff);
+
+.container {
+  background: $light;
+  flex: 1;
+}
