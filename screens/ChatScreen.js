@@ -1,10 +1,11 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, Platform } from 'react-native';
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble, InputToolbar, Send } from "react-native-gifted-chat";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { DirectLine } from "botframework-directlinejs";
-
+import styles from '../styles.scss';
 import * as Config from "../env";
+import { Icon } from 'react-native-elements';
 
 const directLine = new DirectLine({
   secret: Config.SECRET_KEY
@@ -54,12 +55,63 @@ export default class ChatScreen extends React.Component {
     });
   };
 
+  renderBubble(props) {
+    return (
+    <Bubble
+      {...props}
+      textStyle={{
+        left: styles.bubbleTextLeft,
+        right: styles.bubbleTextRight
+      }}
+      wrapperStyle={{
+        left: styles.bubbleWrapperLeft,
+        right: styles. bubbleWrapperRight,
+      }}
+    />)
+  }
+
+  renderInputToolbar(props) {
+    return (
+      <InputToolbar
+        {...props}
+        containerStyle={{
+          borderRadius: 50,
+          margin: 5, 
+          borderColor: '#ff6969', 
+          borderWidth:1,
+          borderTopColor: '#ff6969',
+          borderTopWidth: 1,
+        }}
+      />)
+  }
+
+  renderSend(props) {
+    return (
+      <Send
+        {...props}
+        alwaysShowSend={true}
+        containerStyle = {{borderRadius: 50, borderColor: '#ff6969', borderWidth:1, marginRight: 10, height:30,width:30, marginBottom:7, backgroundColor: '#ff6969'}}
+        children={
+          <Icon
+            name='send'
+            color='#fff'
+            size = {20}
+            iconStyle={{marginBottom: 4, marginLeft:2}}
+          />
+        }
+      />)
+  }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styler.container}>
         <GiftedChat 
           user={{ _id: 1 }}
           messages={this.state.messages}
+          renderBubble={this.renderBubble}
+          renderInputToolbar={this.renderInputToolbar}
+          renderSend={this.renderSend}
+          alignTop= {true}
           isAnimated = {true}
           onSend={this.onSend} 
           />
@@ -69,10 +121,10 @@ export default class ChatScreen extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styler = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffe9e9',
   },
 });

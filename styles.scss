@@ -8,3 +8,19 @@ $gradient: linear-gradient('to right', #ff6969ff, #ff9472ff);
   background: $light;
   flex: 1;
 }
+
+.bubbleTextLeft {
+    color: $light;
+}
+.bubbleTextRight {
+    color: $dark;
+}
+
+.bubbleWrapperLeft {
+    background-color: $primary;
+    border-radius: 20px 20px 20px 0;
+}
+.bubbleWrapperRight {
+    background-color: $light;
+    border-radius: 20px 20px 0 20px;
+}
