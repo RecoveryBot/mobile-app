@@ -41,6 +41,10 @@ export default class HomeScreen extends React.Component {
       <View style={styles.screenContainer}>
         <ScrollView style={styles.homeContainer} contentContainerStyle={styles.contentContainer}>
           <HeartCard email={email}></HeartCard>
+          <View style={styles.greetingContainer}>
+            <Text style={styles.greetingText}>Hello,</Text>
+            <Text style={styles.greetingNameText}>{this.state.name}</Text>
+          </View>
         </ScrollView>
       </View>
     );
