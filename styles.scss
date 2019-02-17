@@ -1,7 +1,7 @@
 $light:     #ffffff;
 $dark:      #626d81;
 $primary:   #ff6969;
-$secondary: #ffe9e9;
+$background: #ffe9e9;
 $subtle:    rgba(255, 255, 255, 0.5);
 
 $font-h1: 48px;
@@ -31,7 +31,7 @@ $font-header: 24px;
 
 .homeContainer {
   @extend %containerBase;
-  background: $secondary;
+  background: $background;
 }
 
 .contentContainer {
