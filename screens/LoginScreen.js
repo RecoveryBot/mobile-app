@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar} from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, StatusBar, Dimensions} from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { LinearGradient } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,7 +22,14 @@ export default class Login extends React.Component {
 				barStyle="light-content"
 			/>
 			<View style={styles.container}>
-				<Image source={require('../assets/images/logo.png')} style={{width: 100, height: 100}} resizeMode='contain' />
+				<Image
+          source={require('../assets/images/logo.png')}
+          style={{
+            width: Dimensions.get('window').width * 0.75,
+            height: Dimensions.get('window').width * 0.75
+          }}
+          resizeMode='contain'
+        />
 				<Input
 					placeholder='Email'
 					placeholderTextColor='#fff'
