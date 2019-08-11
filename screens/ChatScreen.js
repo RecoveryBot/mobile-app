@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Platform } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Platform, Linking } from 'react-native';
 import { GiftedChat, Bubble, InputToolbar, Send } from "react-native-gifted-chat";
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { DirectLine } from "botframework-directlinejs";
@@ -119,7 +119,6 @@ export default class ChatScreen extends React.Component {
           onSend={this.onSend}
 
           />
-          {Platform.OS === 'android' ? <KeyboardSpacer /> : null }
       </View>
     );
   }

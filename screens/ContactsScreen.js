@@ -5,13 +5,14 @@ import {
   ScrollView,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  Linking
 } from 'react-native';
 import { Card, Overlay, Button, Input } from 'react-native-elements'
-import { WebBrowser } from 'expo';
-
+import { Icon, WebBrowser } from 'expo';
 import styles from '../styles.scss';
 import { TitleBar } from '../components/TitleBar';
+import * as config from "../env";
 
 export default class ContactsScreen extends React.Component {
   static navigationOptions = {
@@ -22,8 +23,12 @@ export default class ContactsScreen extends React.Component {
     isFriendModalVisible: false,
     isHotModalVisible: false,
     isAddModalVisible: false,
+    isSentModalVisible: false,
+    userName: "",
     contactName: '',
+    contactNumber: ''
   };
+
 
   handleFriend = () => {
     this.setState({ isFriendModalVisible: !this.state.isFriendModalVisible });
@@ -38,18 +43,29 @@ export default class ContactsScreen extends React.Component {
   }
 
   textFriend = async () => {
-    let msg = "Hey there you ok buddy?"
-    console.log("message about to go")
+    let msg = `Hey! Nadya could really use your support at this time! Please call when you’re available`
     const sendText = await fetch(`https://unitingdust.api.stdlib.com/examples-twilio@dev/?tel=9253395106&body=${encodeURIComponent(msg)}`, {
-      method: 'POST',
+      method: 'GET',
       mode: 'cors',
       credentials: 'omit'
     });
+    this.setState({ isFriendModalVisible: !this.state.isFriendModalVisible });
+    this.setState({ isSentModalVisible: !this.state.isSentModalVisible });
   }
 
   callHotline = () => {
     alert("Hotline Called");
+    Linking.openURL('tel:+19737989785');
     this.setState({ isHotModalVisible: !this.state.isHotModalVisible });
+  }
+
+  saveContact = async () => {
+    const postContacts = await fetch(`${config.server}contacts?userId=nadyafebiana@gmail.com&contactName=${this.state.contactName}&contactPhone=${this.state.contactNumber}`, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'omit'
+    });
+    this.setState({ isAddModalVisible: !this.state.isAddModalVisible });
   }
 
   render() {
@@ -57,9 +73,16 @@ export default class ContactsScreen extends React.Component {
       <View style={styles.screenContainer}>
         <ScrollView style={styles.homeContainer} contentContainerStyle={styles.contentContainer}>
         <TouchableOpacity
-          onPress={this.handleFriend}>
-          <Card Title="Contact a Friend">
-            <Text>Contact a Friend</Text>
+          onPress={this.handleFriend}
+          style={styles.contactCardContainer}
+        >
+          <Card containerStyle={styles.contactCard} wrapperStyle={styles.contactCardInner}>
+            <Icon.Ionicons
+              name="md-people"
+              size={40}
+              color="#626d81"
+            />
+            <Text style={styles.contactText}>Contact a Friend</Text>
           </Card>
         </TouchableOpacity>
         <Overlay 
@@ -87,10 +110,26 @@ export default class ContactsScreen extends React.Component {
             </View>
           </View>
         </Overlay>
+        <Overlay 
+          isVisible={this.state.isSentModalVisible}
+          width="auto"
+          height="auto"
+          onBackdropPress={() => this.setState({ isSentModalVisible: false })}>
+          <View style={styles.modalContent}>
+            <Text style={{fontSize:20}}>Message Sent! You should receive a response shortly</Text>
+          </View>
+        </Overlay>
         <TouchableOpacity
-          onPress={this.handleHotline}>
-          <Card Title="Contact National Hotline">
-            <Text>Contact National Hotline</Text>
+          onPress={this.handleHotline}
+          style={styles.contactCardContainer}
+        >
+          <Card containerStyle={styles.contactCard} wrapperStyle={styles.contactCardInner}>
+            <Icon.Ionicons
+              name="md-warning"
+              size={40}
+              color="#626d81"
+            />
+            <Text style={styles.contactText}>Contact National Hotline</Text>
           </Card>
         </TouchableOpacity>
         <Overlay 
@@ -119,17 +158,24 @@ export default class ContactsScreen extends React.Component {
           </View>
         </Overlay>
         <TouchableOpacity
-          onPress={this.handleAddFriend}>
-          <Card Title="Add a Contact">
-            <Text>Add a Contact</Text>
+          onPress={this.handleAddFriend}
+          style={styles.contactCardContainer}
+        >
+          <Card containerStyle={styles.contactCard} wrapperStyle={styles.contactCardInner}>
+            <Icon.Ionicons
+              name="md-add-circle"
+              size={40}
+              color="#626d81"
+            />
+            <Text style={styles.contactText}>Add a Contact</Text>
           </Card>
         </TouchableOpacity>
         <Overlay 
           isVisible={this.state.isAddModalVisible}
-          width="auto"
-          height="auto"
+          width={250}
+          height={250}
           onBackdropPress={() => this.setState({ isAddModalVisible: false })}>
-          <View style={styles.modalContent}>
+          <View>
             <Text style={{fontSize:20}}>Enter Contact Info</Text>
             <Input 
             placeholder="Name"
@@ -138,6 +184,21 @@ export default class ContactsScreen extends React.Component {
 					  onChangeText={contactName => this.setState({ contactName })}
             value={this.state.contactName}
             />
+            <Input 
+            placeholder="Phone number"
+            leftIcon={{ type: 'font-awesome', name: 'phone', color: '#626d81' }}
+            leftIconContainerStyle={{marginRight: 10}}
+            keyboardType="phone-pad"
+					  onChangeText={contactNumber => this.setState({ contactNumber })}
+            value={this.state.contactNumber}
+            />
+            <Button 
+                title='Save'
+                onPress={this.saveContact}
+                raised
+                type='outline'
+                containerStyle={{width: 130, marginBottom:0}}>
+              </Button>
           </View>
         </Overlay>
         </ScrollView>

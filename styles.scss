@@ -4,98 +4,80 @@ $primary:    #ff6969;
 $accent:     #66e2d6;
 $background: #ffe9e9;
 $subtle:    rgba(255, 255, 255, 0.5);
-
 $font-h1: 48px;
 $font-h2: 32px;
 $font-p: 16px;
 $font-small: 12px;
 $font-header: 24px;
-
 .header {
   background: $primary;
 }
-
 .headerText {
   color: $light;
   font-weight: bold;
   font-size: $font-header;
 }
-
 %containerBase {
   flex: 1;
 }
-
 .screenContainer {
   @extend %containerBase;
   flex-direction: row;
 }
-
 .homeContainer {
   @extend %containerBase;
   background: $background;
 }
-
 .contentContainer {
   height: 100%;
   flex: 1;
 }
-
 .greetingContainer {
   width: 100%;
   padding: 30px;
   align-items: center;
   justify-content: center;
 }
-
 .greetingText {
   color: $dark;
   font-size: $font-p;
   font-weight: bold;
 }
-
 .greetingNameText {
   color: $dark;
   font-size: $font-h2;
   font-weight: bold;
 }
-
 .heartCardContainer {
   width: 100%;
   height: 40%;
 }
-
 .heartCard {
   width: 100%;
   height: 100%;
   flex-direction: row;
 }
-
 .heartInfoContainer {
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
 .heartGraphContainer {
   flex: 2;
   flex-direction: column;
 }
-
 .heartRateCounter {
   flex-direction: row;
 }
-
 .heartRateSubtleText {
   font-size: $font-h1;
   color: $subtle;
 }
-
 .heartRateText {
   font-size: $font-h1;
   color: $light;
 }
-
 .heartRateInfo {
   font-size: $font-small;
   color: $subtle;
@@ -106,7 +88,6 @@ $font-header: 24px;
 .bubbleTextRight {
     color: $dark;
 }
-
 .bubbleWrapperLeft {
     background-color: $primary;
     border-radius: 20px 20px 20px 0;
@@ -115,7 +96,6 @@ $font-header: 24px;
     background-color: $light;
     border-radius: 20px 20px 0 20px;
 }
-
 .modalContent {
   background-color: white;
   padding: 22px;
@@ -123,16 +103,13 @@ $font-header: 24px;
   align-items: center;
   border-radius: 4px;
 }
-
 .slidesContainer {
   width: 100%;
   flex: 1;
 }
-
 .slideWrapper {
   height: 100%;
 }
-
 .slide {
   flex: 1;
   justify-content: center;
@@ -143,11 +120,29 @@ $font-header: 24px;
   margin: 0% 10% 5%;
   border-radius: 10px;
 }
-
 .slideText {
   color: $dark;
 }
-
 .buttonText {
   color: $accent;
+}
+.contactCardContainer {
+  height: 32%;
+  padding: 20px;
+}
+.contactCard {
+  height: 100%;
+  border-radius: 12px;
+  border-width: 0;
+}
+.contactCardInner {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.contactText {
+  color: $dark;
+  font-weight: bold;
+  font-size: $font-header;
+  text-align: center;
 }
